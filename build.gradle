@@ -1,37 +1,26 @@
-buildscript {
-    ext.build_gradle_version = '3.6.1'
+apply plugin: 'com.android.application'
 
-    repositories {
-        maven { url 'https://maven.aliyun.com/repository/public/' }
-        maven { url 'https://maven.aliyun.com/repository/google/' }
-        maven { url 'https://maven.aliyun.com/repository/gradle-plugin/' }
-        maven { url 'https://dl.bintray.com/ppartisan/maven/' }
-        maven { url "https://clojars.org/repo/" }
-        maven { url "https://jitpack.io" }
-        google()
-        mavenLocal()
-        mavenCentral()
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.3"
+
+    defaultConfig {
+        applicationId "com.photoview2.app8848"
+        minSdkVersion 19
+        targetSdkVersion 23
+        versionCode 1
+        versionName "1.0"
     }
-    dependencies {
-        classpath "com.android.tools.build:gradle:$build_gradle_version"
-        
-    }
-    
-}
-allprojects {
-    repositories {
-        maven { url 'https://maven.aliyun.com/repository/public/' } 
-        maven { url 'https://maven.aliyun.com/repository/google/' }
-        maven { url 'https://maven.aliyun.com/repository/gradle-plugin/' }
-        maven { url 'https://dl.bintray.com/ppartisan/maven/' }
-        maven { url "https://clojars.org/repo/" }
-        maven { url "https://jitpack.io" }
-        mavenLocal()
-        mavenCentral()
-        google()
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
     }
 }
 
-task clean(type: Delete) {
-    delete rootProject.buildDir
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+	implementation 'com.github.chrisbanes:PhotoView:2.3.0'
 }
